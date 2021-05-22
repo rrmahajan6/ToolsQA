@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="/Users/rahul.mahajan/Desktop/Dolphin">
+        <groups>
+            <define name="/Users/rahul.mahajan/Desktop/Dolphin">
+                <include name="Regression"></include>
+            </define>
+            <run>
+                <include name="Regression"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="org.dolphin.FramesTest"></class>
+            <class name="org.dolphin.ToolTipText"></class>
+        </classes>
+    </test>
+</suite>

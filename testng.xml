@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="/Users/rahul.mahajan/Desktop/Dolphin">
+        <classes>
+            <class name="org.dolphin.AccordianTest">
+                <methods>
+                    <include name="verifyHandlingAccordian"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.AlertTest">
+                <methods>
+                    <include name="verifyAlertHandling"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.AutocompleteTest">
+                <methods>
+                    <include name="verifyAutocompleteTest"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.BrowserWindowTest">
+                <methods>
+                    <include name="verifyBrowserWindowHandling"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.ButtonTest">
+                <methods>
+                    <include name="verifyClickingButtonsTest"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.CheckBoxTets">
+                <methods>
+                    <include name="verifyCheckBoxes"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.DatePickerTest">
+                <methods>
+                    <include name="verifyDatePicker"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.DynamicPropertiesTest">
+                <methods>
+                    <include name="verifyDynamicPropertiesTest"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.FramesTest">
+                <methods>
+                    <include name="verifyFrameHandling"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.LinkTest">
+                <methods>
+                    <include name="verifyLinkOperations"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.LoginTest">
+                <methods>
+                    <include name="verifyBlankUserNameTest"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.MenuTest">
+                <methods>
+                    <include name="elementsTest"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.ModalDialogTest">
+                <methods>
+                    <include name="verifyFillTheForm"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.PracticeFormTest">
+                <methods>
+                    <include name="verifyFillTheForm"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.ProgressBarTest">
+                <methods>
+                    <include name="verifyFillTheForm"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.RadioButtonTest">
+                <methods>
+                    <include name="radioButtonSelection"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.SelectMenuTest">
+                <methods>
+                    <include name="elementsTest"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.SliderTest">
+                <methods>
+                    <include name="verifyFillTheForm"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.TabTest">
+                <methods>
+                    <include name="elementsTest"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.TextBoxTest">
+                <methods>
+                    <include name="verifyTextBoxTest"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.ToolTipText">
+                <methods>
+                    <include name="elementsTest"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.WebTableTest">
+                <methods>
+                    <include name="verifyCheckBoxes"/>
+                </methods>
+            </class>
+            <class name="org.dolphin.uploadDownloadTest">
+                <methods>
+                    <include name="verifyCheckBoxes"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
