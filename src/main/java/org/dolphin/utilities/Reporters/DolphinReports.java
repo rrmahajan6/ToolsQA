@@ -1,11 +1,13 @@
 package org.dolphin.utilities.Reporters;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.dolphin.Base;
+import org.dolphin.utilities.SeleniumUtils;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 
@@ -34,33 +36,13 @@ public class DolphinReports extends Base {
         }
         return extent;
     }
-    synchronized public void startTest(ITestResult result) {
-        String testClass = result.getTestClass().getName();
-        testClass = testClass.substring(testClass.lastIndexOf('.') + 1, testClass.length());
-        String testCase = result.getName();
-
-
-        ExtentTest test = null;
-        ExtentTest node = null;
-        if (!extentTestMap.containsKey(testClass)) {
-            System.out.println("ExtentTest Map");
-            test = extent.createTest(testClass);
-            extentTestMap.put(testClass, test);
-        }
-        if (!extentNodeMap.containsKey(testClass + testCase)) {
-            test = extentTestMap.get(testClass);
-            node = test.createNode(testCase);
-            extentNodeMap.put(testClass + testCase, node);
-        }
-    }
 
     synchronized public void getResult(ITestResult result) {
         String testClass = result.getTestClass().getName();
-        testClass = testClass.substring(testClass.lastIndexOf('.') + 1, testClass.length());
-
+        testClass = testClass.substring(testClass.lastIndexOf('.') + 1);
         String testCase = result.getName();
-        ExtentTest test = null;
-        ExtentTest node = null;
+        ExtentTest test;
+        ExtentTest node;
 
         if (!extentTestMap.containsKey(testClass)) {
             test = extent.createTest(testClass);
@@ -81,6 +63,7 @@ public class DolphinReports extends Base {
         if (result.getStatus() == ITestResult.FAILURE) {
             if (Base.retryCount == 0) {
                 node.log(Status.FAIL, MarkupHelper.createLabel("Test Case Failed : " + result.getName(), ExtentColor.RED));
+                node.log(Status.FAIL,MediaEntityBuilder.createScreenCaptureFromBase64String(SeleniumUtils.getScreenshot(Base.webDriverThreadSafe.get())).build());
                 node.log(Status.FAIL, MarkupHelper.createLabel("Reason : " + result.getThrowable(), ExtentColor.RED));
                 node.log(Status.FAIL, result.getThrowable());
             } else {
