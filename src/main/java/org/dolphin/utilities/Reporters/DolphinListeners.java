@@ -16,7 +16,6 @@ public class DolphinListeners extends DolphinReports implements ITestListener, I
     public void onTestSkipped(ITestResult result) {
         if (result.getThrowable() instanceof Exception) {
             Reporter.log("Test is skipped due to failed configuration : " + result.getName(), true);
-            report.startTest(result);
             report.getResult(result);
             String testClass = result.getTestClass().getName();
             testClass = testClass.substring(testClass.lastIndexOf(".") + 1, testClass.length());
@@ -28,29 +27,17 @@ public class DolphinListeners extends DolphinReports implements ITestListener, I
             }
         } else if (result.getThrowable().getMessage().contains("depends on not successfully finished methods")) {
             Reporter.log("Test is skipped : " + result.getName(), true);
-            report.startTest(result);
             report.getResult(result);
         } else {
             Reporter.log("Test is skipped with exception : " + result.getName(), true);
-            report.startTest(result);
             report.getResult(result);
         }
     }
 
     @Override
     public void onTestFailure(ITestResult tr) {
-
-        SeleniumUtils.deleteOlderFiles(5, "/output/reports/", "/output/FailedTestsScreenshots/");
         report.getResult(tr);
         Reporter.log("Test Case Ended " + tr.getName(), true);
-        String testClass = tr.getTestClass().getName();
-        testClass = testClass.substring(testClass.lastIndexOf(".") + 1, testClass.length());
-        String testCase = tr.getName();
-
-        if (Objects.nonNull(Base.webDriverThreadSafe.get())) {
-            String base64 = SeleniumUtils.getScreenshot(Base.webDriverThreadSafe.get());
-            DolphinReports.extentNodeMap.get(testClass + testCase).addScreenCaptureFromBase64String(base64);
-        }
     }
 
     @Override
@@ -62,7 +49,6 @@ public class DolphinListeners extends DolphinReports implements ITestListener, I
 
     @Override()
     public void onTestStart(ITestResult tr) {
-        report.startTest(tr);
         report.getResult(tr);
         Reporter.log("Test Case started " + tr.getName(), true);
     }
