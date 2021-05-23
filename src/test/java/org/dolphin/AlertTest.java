@@ -1,18 +1,14 @@
 package org.dolphin;
-
 import org.dolphin.pages.AlertsPage;
 import org.dolphin.pages.MainPage;
 import org.dolphin.utilities.DataUtils.DataSource;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.lang.reflect.Method;
-import java.security.SecureRandom;
 
 public class AlertTest extends Base {
     public WebDriver driver;

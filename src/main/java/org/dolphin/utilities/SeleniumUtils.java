@@ -6,6 +6,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 import org.testng.Reporter;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,22 +21,24 @@ public class SeleniumUtils {
 
     private final static Logger logger = Logger.getLogger("SeleniumUtils");
 
-    public static void moveToElementAndClick(WebDriver currentBrowserDriver,WebElement element) {
+    public static void moveToElementAndClick(WebDriver currentBrowserDriver, WebElement element) {
         Actions actions = new Actions(currentBrowserDriver);
         actions.moveToElement(element).build().perform();
         SeleniumUtils.pause(2);
         element.click();
     }
 
-    public static void moveToElement(WebDriver currentBrowserDriver,WebElement element) {
+    public static void moveToElement(WebDriver currentBrowserDriver, WebElement element) {
         Actions actions = new Actions(currentBrowserDriver);
         actions.moveToElement(element).build().perform();
     }
-    public static void doubleClickElement(WebDriver currentBrowserDriver,WebElement element) {
+
+    public static void doubleClickElement(WebDriver currentBrowserDriver, WebElement element) {
         Actions actions = new Actions(currentBrowserDriver);
         actions.doubleClick(element).build().perform();
     }
-    public static void rightClickElement(WebDriver currentBrowserDriver,WebElement element) {
+
+    public static void rightClickElement(WebDriver currentBrowserDriver, WebElement element) {
         Actions actions = new Actions(currentBrowserDriver);
         actions.contextClick(element).build().perform();
     }
@@ -72,6 +75,7 @@ public class SeleniumUtils {
         JavascriptExecutor js = (JavascriptExecutor) currentBrowserDriver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
+
     public static void scrollDownLittle(WebDriver currentBrowserDriver) {
         JavascriptExecutor js = (JavascriptExecutor) currentBrowserDriver;
         js.executeScript("window.scrollBy(0,400)");
@@ -116,27 +120,8 @@ public class SeleniumUtils {
         }
     }
 
-    public static String getScreenshot(WebDriver driver, String screenshotName) {
-        String encodedFile = "";
-        deleteOlderFiles(1);
-        String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-        TakesScreenshot ts = (TakesScreenshot) driver;
-        File source = ts.getScreenshotAs(OutputType.FILE);
-        //after execution, you could see a folder "FailedTestsScreenshots" under src folder
-        String destination = System.getProperty("user.dir") + "/output/FailedTestsScreenshots/" + dateName + ".png";
-        File finalDestination = new File(destination);
-        try {
-            FileUtils.copyFile(source, finalDestination);
-            File f = new File(destination);
-            FileInputStream fileInputStreamReader = new FileInputStream(f);
-            byte[] bytes = new byte[(int) f.length()];
-            fileInputStreamReader.read(bytes);
-            encodedFile = new String(Base64.encodeBase64(bytes), "UTF-8");
-            encodedFile = "data:image/png;base64," + encodedFile;
-        } catch (IOException io) {
-            io.printStackTrace();
-        }
-        return encodedFile;
+    public static String getScreenshot(WebDriver driver) {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
     }
 
     public static void elementHighlighter(WebDriver driver, WebElement element) {
@@ -297,7 +282,7 @@ public class SeleniumUtils {
                     return false;
                 }
             } catch (NullPointerException e) {
-              //  logger.error("isNullOrEmpty: Null string while checking the the string is null or Empty.");
+                //  logger.error("isNullOrEmpty: Null string while checking the the string is null or Empty.");
                 return true;
             }
         }
@@ -373,23 +358,27 @@ public class SeleniumUtils {
         driver.switchTo().window(tabs.get(0));
         Reporter.log("cleared cached sucessfully");
     }
+
     public static void seleniumClick(WebDriver driver, WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
     }
-    public static void scrollToElementAndClick(WebDriver driver,WebElement element){
-        SeleniumUtils.scrollElementIntoView(driver,element);
-        SeleniumUtils.performClick(driver,element);
+
+    public static void scrollToElementAndClick(WebDriver driver, WebElement element) {
+        SeleniumUtils.scrollElementIntoView(driver, element);
+        SeleniumUtils.performClick(driver, element);
     }
-    public static Alert waitForAlertToBeAvailable(WebDriver driver, int timeOut){
-        WebDriverWait wait=new WebDriverWait(driver,timeOut);
+
+    public static Alert waitForAlertToBeAvailable(WebDriver driver, int timeOut) {
+        WebDriverWait wait = new WebDriverWait(driver, timeOut);
         wait.until(ExpectedConditions.alertIsPresent());
-        Alert alert=driver.switchTo().alert();
+        Alert alert = driver.switchTo().alert();
         return alert;
     }
-    public static void selectFromDropDown(WebDriver driver,WebElement dropdownElement,String valueToSelect){
-        Select dropdown=new Select(dropdownElement);
+
+    public static void selectFromDropDown(WebDriver driver, WebElement dropdownElement, String valueToSelect) {
+        Select dropdown = new Select(dropdownElement);
         dropdown.selectByVisibleText(valueToSelect);
     }
 }

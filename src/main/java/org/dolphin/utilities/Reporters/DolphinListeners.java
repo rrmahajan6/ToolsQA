@@ -23,7 +23,7 @@ public class DolphinListeners extends DolphinReports implements ITestListener, I
             String testCase = result.getName();
 
             if (Objects.nonNull(Base.webDriverThreadSafe.get())) {
-                String base64 = SeleniumUtils.getScreenshot(Base.webDriverThreadSafe.get(), testCase);
+                String base64 = SeleniumUtils.getScreenshot(Base.webDriverThreadSafe.get());
                 DolphinReports.extentNodeMap.get(testClass + testCase).addScreenCaptureFromBase64String(base64);
             }
         } else if (result.getThrowable().getMessage().contains("depends on not successfully finished methods")) {
@@ -48,7 +48,7 @@ public class DolphinListeners extends DolphinReports implements ITestListener, I
         String testCase = tr.getName();
 
         if (Objects.nonNull(Base.webDriverThreadSafe.get())) {
-            String base64 = SeleniumUtils.getScreenshot(Base.webDriverThreadSafe.get(), tr.getName());
+            String base64 = SeleniumUtils.getScreenshot(Base.webDriverThreadSafe.get());
             DolphinReports.extentNodeMap.get(testClass + testCase).addScreenCaptureFromBase64String(base64);
         }
     }
